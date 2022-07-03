@@ -45,10 +45,10 @@ def prep_acnh_data(df):
 
 def split_acnh_data(df):
 
-    train_validate, test = train_test_split(df, test_size=.15, 
+    train_validate, test = train_test_split(df, test_size=.2, 
         random_state=17)
 
-    train, validate = train_test_split(train_validate, test_size=.2, 
+    train, validate = train_test_split(train_validate, test_size=.3, 
         random_state=17)
     return train, validate, test
 
@@ -619,14 +619,176 @@ def encode_gender_vars(df):
 
 
 
+
+###### encode colors ########
+
+
+
+def is_beige(df):
+    if df.color_1.lower() == 'beige':
+        return 1
+    else:
+        return 0
+
+
+def is_white(df):
+    if df.color_1.lower() == 'white':
+        return 1
+    else:
+        return 0
+
+
+def is_black(df):
+    if df.color_1.lower() == 'black':
+        return 1
+    else:
+        return 0
+
+
+def is_light_blue(df):
+    if df.color_1.lower() == 'light blue':
+        return 1
+    else:
+        return 0
+
+
+def is_colorful(df):
+    if df.color_1.lower() == 'colorful':
+        return 1
+    else:
+        return 0
+
+
+def is_gray(df):
+    if df.color_1.lower() == 'gray':
+        return 1
+    else:
+        return 0
+
+
+def is_pink(df):
+    if df.color_1.lower() == 'pink':
+        return 1
+    else:
+        return 0
+
+
+
+def is_yellow(df):
+    if df.color_1.lower() == 'yellow':
+        return 1
+    else:
+        return 0
+
+
+def is_red(df):
+    if df.color_1.lower() == 'red':
+        return 1
+    else:
+        return 0
+
+
+
+
+def is_orange(df):
+    if df.color_1.lower() == 'orange':
+        return 1
+    else:
+        return 0
+
+
+
+
+
+def is_purple(df):
+    if df.color_1.lower() == 'purple':
+        return 1
+    else:
+        return 0
+
+
+
+
+def is_green(df):
+    if df.color_1.lower() == 'green':
+        return 1
+    else:
+        return 0
+
+
+
+def is_brown(df):
+    if df.color_1.lower() == 'brown':
+        return 1
+    else:
+        return 0
+
+
+
+def is_blue(df):
+    if df.color_1.lower() == 'blue':
+        return 1
+    else:
+        return 0
+
+
+
+def is_aqua(df):
+    if df.color_1.lower() == 'aqua':
+        return 1
+    else:
+        return 0
+
+
+
+
+
+def encode_color_1_vars(df):
+
+    df['is_beige'] = df.apply(is_beige, axis = 1)
+
+    df['is_white'] = df.apply(is_white, axis = 1)
+
+    df['is_black'] = df.apply(is_black, axis = 1)
+
+    df['is_light_blue'] = df.apply(is_light_blue, axis = 1)
+
+    df['is_colorful'] = df.apply(is_colorful, axis = 1)
+
+    df['is_gray'] = df.apply(is_gray, axis = 1)
+
+    df['is_pink'] = df.apply(is_pink, axis = 1)
+
+    df['is_yellow'] = df.apply(is_yellow, axis = 1)
+
+    df['is_red'] = df.apply(is_red, axis = 1)
+
+    df['is_orange'] = df.apply(is_orange, axis = 1)
+
+    df['is_purple'] = df.apply(is_purple, axis = 1)
+
+    df['is_green'] = df.apply(is_green, axis = 1)
+
+    df['is_brown'] = df.apply(is_brown, axis = 1)
+
+    df['is_blue'] = df.apply(is_blue, axis = 1)
+
+    df['is_aqua'] = df.apply(is_aqua, axis = 1)
+
+    return df 
+
+
+
+
+
+
 def encode_all_vars(df):
     unencoded_columns = ['position', 'tier', 'species', 'gender', 'personality', 'hobby', 'favorite_song', 'style_1', 'style_2', 'color_1', 'color_2']
 
-    df = encode_gender_vars(df)
 
     df = encode_hobby_vars(df)
 
-    df = encode_style_vars(df)
+    df = encode_color_1_vars(df)
 
     df = encode_species_vars(df)
 
