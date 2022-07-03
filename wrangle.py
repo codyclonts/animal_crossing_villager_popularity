@@ -785,10 +785,11 @@ def encode_color_1_vars(df):
 def encode_all_vars(df):
     unencoded_columns = ['position', 'tier', 'species', 'gender', 'personality', 'hobby', 'favorite_song', 'style_1', 'style_2', 'color_1', 'color_2']
 
+    df = encode_gender_vars(df)
 
     df = encode_hobby_vars(df)
 
-    df = encode_color_1_vars(df)
+    df = encode_style_vars(df)
 
     df = encode_species_vars(df)
 
