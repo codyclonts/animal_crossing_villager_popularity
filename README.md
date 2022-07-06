@@ -3,6 +3,8 @@
 ## Project Oversight
 - Animal Crossing: New Horizons (acnh) is video game in which the player controls a character who moves to a deserted island. In this game, the player accomplishes assigned tasks, develops the island as they choose, and brings other characters to live on their island. For this project, I am using information from the Animal Crossing New Horizon character catalog csv to acquire, prepare, explore, and create models to predict whether or not a new character will be successful. 
 
+  - A successful character is defined as falling within tier 1, 2, or 3 in the popularity poll. This accounts for about 17% of the characters.
+
 - This information is based off of a popularity poll that is updated monthly. It is current as of June 30, 2022.
 
 
