@@ -12,6 +12,9 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def get_acnh_data():
+    ''' 
+    This function acquires a local csv entitled villagers.csv and returns it as a dataframe. For this function to run, it must exist as a csv in the working directory
+    '''
     filename = 'villagers.csv'
 
     if os.path.isfile(filename):
@@ -21,6 +24,9 @@ def get_acnh_data():
 
 
 def successful(tier):
+    ''' 
+    This function takes information from the villagers.csv tier column and returns a 1 if the tier is a 1,2, or 3 or a 0 if it is anything else
+    '''
     if tier == 1 or tier == 2 or tier == 3:
         return 1
     else:
@@ -30,6 +36,13 @@ def successful(tier):
 
     
 def prep_acnh_data(df):
+    '''
+    prepares the data from the villager.csv file by lower-casing column
+    names and getting rid of spaces,  getting rid of the columns listed,
+    creating an is successful tier based on the successful functio, 
+    renaming the rank column to position, 
+    and stripping any blank spaces.
+    '''
     columns = ['birthday', 'catchphrase', 'wallpaper', 'flooring', 'filename', 'furniture_list', 'unique_entry_id']
     df.columns = df.columns.str.lower()
     df.columns = df.columns.str.replace( ' ' , '_')
@@ -43,6 +56,11 @@ def prep_acnh_data(df):
 
 
 def split_acnh_data(df):
+    '''
+    Takes in a cleaned acnh dataframe, splits it into train, validate and test subgroups and then returns those subgroups.
+    Arguments: df - a cleaned pandas dataframe with the expected feature names and columns in the acnh dataset
+    Return: train, validate, test - dataframes ready for the exploration and model phases.
+    '''
 
     train_validate, test = train_test_split(df, test_size=.2, 
         random_state=17)
@@ -63,7 +81,10 @@ def split_acnh_data(df):
 
 
 
-
+'''
+These functions are used to create dummy variables for each of the species in the species column. 
+These functions are to be used in conjunction with the encode species vars function listed below
+'''
 
 
 
@@ -315,7 +336,11 @@ def is_bull(df):
 
 
 
-def encode_species_vars(df):
+def encode_species_vars(df): 
+    '''
+    Takes in the information from the species dummy variables functions listed above to create new columns. 
+    These columns are encoded variables used for modeling. 
+    '''
     df['is_squirrel'] = df.apply(is_squirrel, axis = 1)
 
     df['is_cat'] = df.apply(is_cat, axis = 1)
@@ -392,6 +417,10 @@ def encode_species_vars(df):
 
 ##### encode the personalities ######
 
+'''
+These functions are used to create dummy variables for each of the personalities in the personality column. 
+These functions are to be used in conjunction with the encode personality vars function listed below
+'''
 
 def is_smug(df):
     if df.personality.lower() == 'smug':
@@ -454,6 +483,10 @@ def is_cranky(df):
 
 
 def encode_personality_vars(df):
+    '''
+    Takes in the information from the personality dummy variables functions listed above to create new columns. 
+    These columns are encoded variables used for modeling. 
+    '''
     df['is_smug'] = df.apply(is_smug, axis = 1)
 
     df['is_peppy'] = df.apply(is_peppy, axis = 1)
@@ -475,7 +508,10 @@ def encode_personality_vars(df):
 
 
 ###### encode style_1 ######
-
+'''
+These functions are used to create dummy variables for each of the styles in the style_1 column. 
+These functions are to be used in conjunction with the encode style vars function listed below
+'''
 def is_elegant(df):
     if df.style_1.lower() == 'elegant':
         return 1
@@ -518,7 +554,10 @@ def is_active(df):
 
 
 def encode_style_vars(df):
-
+    '''
+    Takes in the information from the style dummy variables functions listed above to create new columns. 
+    These columns are encoded variables used for modeling. 
+    '''
     df['is_elegant'] = df.apply(is_elegant, axis = 1)
 
     df['is_simple'] = df.apply(is_simple, axis = 1)
@@ -538,7 +577,10 @@ def encode_style_vars(df):
 
 
 #### encode hobby column #####
-
+    '''
+    These functions are used to create dummy variables for each of the hobbies in the hobby column. 
+    These functions are to be used in conjunction with the encode hobby vars function listed below
+    '''
 def is_music(df):
     if df.hobby.lower() == 'music':
         return 1
@@ -582,7 +624,10 @@ def is_fitness(df):
 
 
 def encode_hobby_vars(df):
-
+    '''
+    Takes in the information from the style dummy variables functions listed above to create new columns. 
+    These columns are encoded variables used for modeling.    
+    '''
     df['is_music'] = df.apply(is_music, axis = 1)
 
     df['is_nature'] = df.apply(is_nature, axis = 1)
@@ -600,7 +645,10 @@ def encode_hobby_vars(df):
 
 ####### encode gender ######
 
-
+    '''
+    This function are used to create dummy variables for each of the genders in the gender column. 
+    These functions are to be used in conjunction with the encode gender vars function listed below
+    '''
 
 def is_female(df):
     if df.gender.lower() == 'female':
@@ -611,7 +659,10 @@ def is_female(df):
 
 
 def encode_gender_vars(df): 
-
+    '''
+    Takes in the information from the gender dummy variables function listed above to create new columns. 
+    These columns are encoded variables used for modeling.    
+    '''
     df['is_female'] = df.apply(is_female, axis = 1)
 
     return df 
@@ -621,7 +672,10 @@ def encode_gender_vars(df):
 
 ###### encode colors ########
 
-
+    '''
+    This function are used to create dummy variables for each of the colors in the color_1 column. 
+    These functions are to be used in conjunction with the encode color_1 vars function listed below
+    '''
 
 def is_beige(df):
     if df.color_1.lower() == 'beige':
@@ -743,7 +797,10 @@ def is_aqua(df):
 
 
 def encode_color_1_vars(df):
-
+    '''
+    Takes in the information from the color dummy variables function listed above to create new columns. 
+    These columns are encoded variables used for modeling.    
+    '''
     df['is_beige'] = df.apply(is_beige, axis = 1)
 
     df['is_white'] = df.apply(is_white, axis = 1)
@@ -782,6 +839,10 @@ def encode_color_1_vars(df):
 
 
 def encode_all_vars(df):
+    '''
+    Takes in functions used to encode the gender, hobby, style_1, species, and personality columns and creates new columns
+    based on the encoded values. Drops unencoded columns. Returns dataframe to be used for modeling.
+    '''
     unencoded_columns = ['position', 'tier', 'species', 'gender', 'personality', 'hobby', 'favorite_song', 'style_1', 'style_2', 'color_1', 'color_2']
 
     df = encode_gender_vars(df)
